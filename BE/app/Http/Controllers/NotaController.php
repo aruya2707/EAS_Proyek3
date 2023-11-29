@@ -4,7 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Nota;
 use Illuminate\Http\Request;
-use App\Models\Notas;
+
 
 class NotaController extends Controller
 {
@@ -15,6 +15,17 @@ class NotaController extends Controller
     {
         $notas = Nota::all();
         return response()->json(['notas' => $notas], 200);
+    }
+
+    public function showStruk($kodeNota)
+    {
+        $nota = Nota::with('tenan', 'kasir', 'barangNotas.barang')->find($kodeNota);
+
+        if (!$nota) {
+            return response()->json(['message' => 'Nota not found'], 404);
+        }
+
+        return response()->json(['nota' => $nota], 200);
     }
 
     /**
