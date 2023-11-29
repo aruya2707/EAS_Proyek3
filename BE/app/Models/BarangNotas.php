@@ -10,7 +10,7 @@ class BarangNota extends Model
     use HasFactory;
 
     protected $table = 'barangnotas'; // Sesuaikan dengan nama tabel yang digunakan
-
+    
     protected $fillable = [
         'KodeNota',
         'KodeBarang',
@@ -29,6 +29,6 @@ class BarangNota extends Model
 
     public function barang()
     {
-        return $this->belongsTo(Barang::class, 'KodeBarang');
+        return $this->belongsTo(Barangs::class, 'KodeBarang');
     }
 }

@@ -12,9 +12,9 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('notas', function (Blueprint $table) {
-            $table->bigIncrements('KodeNota');
-            $table->unsignedBigInteger('KodeTenan');
-            $table->unsignedBigInteger('KodeKasir');
+            $table->string('KodeNota')->primary();
+            $table->string('KodeTenan');
+            $table->string('KodeKasir');
 
             $table->date('TglNota');
             $table->time('JamNota');
