@@ -13,7 +13,7 @@ class KasirController extends Controller
     public function index()
     {
         $tenans = Kasirs::all();
-        return response()->json(['tenans' => $tenans], 200);
+        return response()->json(['kasirs' => $tenans], 200);
     }
 
 }

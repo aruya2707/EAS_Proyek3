@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\BarangController;
+use App\Http\Controllers\KasirController;
 use App\Http\Controllers\TenanController;
 use Illuminate\Http\Request;
 use Illuminate\Routing\RouteRegistrar;
@@ -25,8 +26,11 @@ Route::get('/tenan', [TenanController::class, 'index']);
 
 Route::get('/kasir', [KasirController::class, 'index']);
 
-// Route::get('/barang', [BarangController::class, 'index']);
+Route::get('/barang', [BarangController::class, 'index']);
 // Route::post('/barang/insert', [BarangController::class, 'store']);
 // Route::get('/barang/{kode_barang}', [BarangController::class, 'show']);
 // Route::put('/barang/update/{kode_barang}', [BarangController::class, 'update']);
 // Route::delete('/barang/delete/{kode_barang}', [BarangController::class, 'destroy']);
+
+Route::get('/transaksi', [NotaController::class, 'index']);
+Route::get('/struk/{kodeNota}', [NotaController::class, 'showStruk']);
