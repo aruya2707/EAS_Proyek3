@@ -2,7 +2,9 @@
 
 namespace Database\Seeders;
 
+use App\Models\BarangNota;
 use App\Models\Nota;
+
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 
@@ -66,6 +68,14 @@ class NotaSeeder extends Seeder
             'JumlahBelanja' => 50000,
             'Diskon' => 1,
             'Total' => 49500,
+        ]);
+
+        BarangNota::create([
+            'KodeNota' => 'NO22151104205',
+            'KodeBarang' => 'BRG[NIM]11',
+            'JumlahBarang' => 30,
+            'HargaSatuan' => 'KS22151104202',
+            'Jumlah' => 50
         ]);
     }
 }
