@@ -9,8 +9,7 @@ class Barangs extends Model
 {
     use HasFactory;
     protected $table = 'barangs'; // Sesuaikan dengan nama tabel yang digunakan
-    protected $primaryKey = 'KodeBarang'; // Sesuaikan dengan nama primary key tabel
-
+    protected $primaryKey = 'KodeBarang';
     protected $fillable = [
         'NamaBarang',
         'Satuan',

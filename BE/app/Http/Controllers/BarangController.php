@@ -12,8 +12,8 @@ class BarangController extends Controller
      */
     public function index()
     {
-        $tenans = Barangs::all();
-        return response()->json(['barangs' => $tenans], 200);
+        $barangs = Barangs::all();
+        return response()->json(['barangs' => $barangs], 200);
     }
 
     /**
@@ -30,14 +30,18 @@ class BarangController extends Controller
     public function store(Request $request)
     {
         $request->validate([
+            'KodeBarang' => 'required|unique:barangs', // pastikan ada aturan unique untuk KodeBarang di tabel barangs
             'NamaBarang' => 'required',
             'Satuan' => 'required',
-            'HargaSatuan' => 'required|numeric',
+            'HargaSatuan' => 'required|string',
             'Stok' => 'required|integer',
         ]);
-
+    
+        // Konversi 'HargaSatuan' menjadi tipe data numerik jika diperlukan
+        $request['HargaSatuan'] = (float) str_replace('Rp.', '', $request['HargaSatuan']);
+    
         $barang = Barangs::create($request->all());
-
+    
         return response()->json(['barang' => $barang, 'message' => 'Barang created successfully'], 201);
     }
 
@@ -67,24 +71,27 @@ class BarangController extends Controller
      * Update the specified resource in storage.
      */
     public function update(Request $request, string $id)
-    {
-        $request->validate([
-            'NamaBarang' => 'required',
-            'Satuan' => 'required',
-            'HargaSatuan' => 'required|numeric',
-            'Stok' => 'required|integer',
-        ]);
+{
+    $request->validate([
+        'NamaBarang' => 'required',
+        'Satuan' => 'required',
+        'HargaSatuan' => 'required|string', // Sesuaikan dengan kebutuhan Anda
+        'Stok' => 'required|integer',
+    ]);
 
-        $barang = Barangs::find($id);
+    // Konversi 'HargaSatuan' menjadi tipe data numerik jika diperlukan
+    $request['HargaSatuan'] = (float) str_replace('Rp.', '', $request['HargaSatuan']);
 
-        if (!$barang) {
-            return response()->json(['message' => 'Barang not found'], 404);
-        }
+    $barang = Barangs::find($id);
 
-        $barang->update($request->all());
-
-        return response()->json(['barang' => $barang, 'message' => 'Barang updated successfully'], 200);
+    if (!$barang) {
+        return response()->json(['message' => 'Barang not found'], 404);
     }
+
+    $barang->update($request->all());
+
+    return response()->json(['barang' => $barang, 'message' => 'Barang updated successfully'], 200);
+}
 
 
     /**
