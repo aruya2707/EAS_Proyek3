@@ -20,7 +20,15 @@ use Illuminate\Support\Facades\Route;
 */
 
 
-Route::get('/tenan', [TenanController::class, 'index']);
+//Route::get('/tenan', [TenanController::class, 'index']);
+Route::prefix('tenan')->group(function () {
+    Route::get('/', [TenanController::class, 'index'])->name('tenans.index');;
+    Route::get('/{id}', [TenanController::class, 'show'])->name('tenans.show');
+    Route::post('/', [TenanController::class, 'store']);
+    Route::put('/{id}', [TenanController::class, 'update'])->name('tenans.edit');;
+    Route::delete('/{id}', [TenanController::class, 'destroy'])->name('tenans.destroy');
+});
+Route::get('/tenan/create', [TenanController::class, 'create'])->name('tenans.create');
 
 Route::get('/kasir', [KasirController::class, 'index']);
 
